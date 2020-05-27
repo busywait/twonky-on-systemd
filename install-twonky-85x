@@ -43,7 +43,7 @@ sudo chown twonky.twonky /etc/twonky
 echo Twonky does not need to write to the install folder so change the ownership to root.root
 sudo chown root.root /opt/twonky
 
-echo Set the home folder for the twonky service, to allow caching of intermediate files
+echo Set the home folder for the twonky service, to allow caching of working files like thumbnails and the database
 sudo usermod -d /var/opt/twonky twonky
 
 echo Supply additional defaults for this install
