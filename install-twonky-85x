@@ -1,0 +1,66 @@
+#!/bin/bash
+#set -x
+#trap read debug
+
+echo Check if the Twonky zip package has been downloaded already
+if [ ! -e ./twonky-armel-glibc-2.15-hf-8.5.1.zip ]
+then
+        echo downloading from http://download.twonky.com/8.5.1/
+        wget http://download.twonky.com/8.5.1/twonky-armel-glibc-2.15-hf-8.5.1.zip
+else
+        echo using existing twonky package
+        ls -l twonky-armel-glibc-2.15-hf-8.5.1.zip
+fi
+
+echo Creating a no-login service account for twonky mediaserver to avoid running as root
+sudo useradd --system --no-create-home --shell /usr/sbin/nologin twonky
+
+echo Make directories for the working files and folders
+# Creating directories when we only need a single file saves hassle later if,
+# for example, the log file gets deleted then the twonky service has no
+# permission to recreate it. Same with .ini in /etc/twonky. With permission to
+# write in to its own directories the twonky service can recreate any missing file.
+sudo mkdir /var/opt/twonky
+echo Make a directory for log files
+sudo mkdir /var/log/twonky
+echo Make a directory for the config file
+sudo mkdir /etc/twonky
+
+echo Unpack the townky install package to our install location
+sudo unzip -d /opt/twonky ./twonky-armel-glibc-2.15-hf-8.5.1.zip
+
+echo Provide the path to ffmpeg to enable thumbnail creation for videos and images
+sudo sh -c "echo /usr/bin > /opt/twonky/cgi-bin/ffmpeg.location"
+echo Provide the path to convert \(ImageMagick\) to enable thumbnail creation for photos
+sudo sh -c "echo /user/bin > /opt/twonky/cgi-bin/convert.location"
+
+echo Change the ownership of all writable folders to twonky.twonky
+sudo chown twonky.twonky /var/opt/twonky
+sudo chown twonky.twonky /var/log/twonky
+sudo chown twonky.twonky /etc/twonky
+# /var/run/twonky will be managed by systemd
+
+echo Twonky does not need to write to the install folder so change the ownership to root.root
+sudo chown root.root /opt/twonky
+
+echo Set the home folder for the twonky service, to allow caching of intermediate files
+sudo usermod -d /var/opt/twonky twonky
+
+echo Supply additional defaults for this install
+sudo sh -c "echo \# Point twonky to the writable folders in this install >> /opt/twonky/twonkyserver-default.ini"
+#sudo sh -c "echo cachedir=/var/opt/twonky/cache >> /opt/twonky/twonkyserver-default.ini"
+sudo sh -c "echo appdata=/var/opt/twonky >> /opt/twonky/twonkyserver-default.ini"
+
+echo Supply config changes to group tracks by albumartist in preference to artist
+sudo sh -c "echo \# Changes from the Twonky defaults to behave more like minidlna and group tracks by albumartist >> /opt/twonky/twonkyserver-default.ini"
+sudo sh -c "echo scan_compilation_flag=0 >> /opt/twonky/twonkyserver-default.ini"
+sudo sh -c "echo force_albumartist=1 >> /opt/twonky/twonkyserver-default.ini"
+
+echo Add a systemd unit file to run Twonky as a service on startup
+sudo cp ./twonky.service /etc/systemd/system/twonky.service
+sudo systemctl daemon-reload
+sudo systemctl enable twonky.service
+
+echo Start Twonky
+# sudo -u twonky /opt/twonky/twonkystarter --mspid /var/run/twonky/twonky-mediaserver.pid --inifile /etc/twonky/twonkyserver.ini --logfile /var/log/twonky/twonky.log
+sudo systemctl start twonky.service
