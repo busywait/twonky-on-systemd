@@ -26,7 +26,7 @@ sudo mkdir /var/log/twonky
 echo Make a directory for the config file
 sudo mkdir /etc/twonky
 
-echo Unpack the townky install package to our install location
+echo Unpack the twonky install package to our install location
 sudo unzip -d /opt/twonky ./twonky-armel-glibc-2.15-hf-8.5.1.zip
 
 echo Provide the path to ffmpeg to enable thumbnail creation for videos and images
