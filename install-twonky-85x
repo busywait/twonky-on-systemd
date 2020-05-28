@@ -2,14 +2,17 @@
 #set -x
 #trap read debug
 
+TWONKY_DOWNLOAD=http://download.twonky.com/8.5.1/
+TWONKY_FILE=twonky-i686-glibc-2.9-8.5.1.zip
+
 echo Check if the Twonky zip package has been downloaded already
-if [ ! -e ./twonky-armel-glibc-2.15-hf-8.5.1.zip ]
+if [ ! -e ./$TWONKY_FILE ]
 then
         echo downloading from http://download.twonky.com/8.5.1/
-        wget http://download.twonky.com/8.5.1/twonky-armel-glibc-2.15-hf-8.5.1.zip
+        wget $TWONKY_DOWNLOAD$TWONKY_FILE
 else
         echo using existing twonky package
-        ls -l twonky-armel-glibc-2.15-hf-8.5.1.zip
+        ls -l $TWONKY_FILE
 fi
 
 echo Creating a no-login service account for twonky mediaserver to avoid running as root
@@ -27,7 +30,7 @@ echo Make a directory for the config file
 sudo mkdir /etc/twonky
 
 echo Unpack the twonky install package to our install location
-sudo unzip -d /opt/twonky ./twonky-armel-glibc-2.15-hf-8.5.1.zip
+sudo unzip -d /opt/twonky ./$TWONKY_FILE
 
 echo Provide the path to ffmpeg to enable thumbnail creation for videos and images
 sudo sh -c "echo /usr/bin > /opt/twonky/cgi-bin/ffmpeg.location"
