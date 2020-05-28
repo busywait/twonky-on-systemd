@@ -6,15 +6,13 @@ After=syslog.target network.target
 Type=simple
 User=twonky
 Group=twonky
-WorkingDirectory=/var/opt/twonky
-# Instruct systemd to create and manage /var/run/twonky to hold the service PID file
+# create /run/twonky in the temporary /run filesystem, owned by user twonky, group twonky
 RuntimeDirectory=twonky
-PIDFile=/var/run/twonky/mediaserver.pid
-ExecStart=/opt/twonky/twonkystarter -mspid /var/run/twonky/mediaserver.pid -logfile /var/log/twonky/twonky.log -inifile /etc/twonky/twonkyserver.ini ;
-ExecStop=kill -s TERM $MAINPID ;
-ExecStopPost=killall -s TERM twonkystarter ; killall -s TERM twonky ;
-# Reload (usually?) fails because twonky stops - I don't know why.
-ExecReload=kill -s HUP $MAINPID ;
-
-[Install]
-WantedBy=multi-user.target
+PIDFile=/run/twonky/mediaserver.pid
+WorkingDirectory=/var/opt/twonky
+ExecStart=/opt/twonky/twonkystarter -mspid /run/twonky/mediaserver.pid -logfile /var/log/twonky/twonky.log -inifile /etc/twonky/twonkyserver.ini
+ExecStop=kill -s TERM $MAINPID
+ExecStopPost=-killall -s TERM twonkystarter
+ExecStopPost=-killall -s TERM twonky
+# Twonky doesn't appear to support reload, and stops with no error when this is called
+ExecReload=kill -s HUP $MAINPID
