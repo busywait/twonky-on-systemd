@@ -16,11 +16,11 @@ echo Creating a no-login service account for twonky mediaserver to avoid running
 sudo useradd --system --no-create-home --shell /usr/sbin/nologin twonky
 
 echo Make directories for the working files and folders
+sudo mkdir /var/opt/twonky
 # Creating directories when we only need a single file saves hassle later if,
 # for example, the log file gets deleted then the twonky service has no
 # permission to recreate it. Same with .ini in /etc/twonky. With permission to
-# write in to its own directories the twonky service can recreate any missing file.
-sudo mkdir /var/opt/twonky
+# write in to its own directories the twonky service will recreate any missing file.
 echo Make a directory for log files
 sudo mkdir /var/log/twonky
 echo Make a directory for the config file
