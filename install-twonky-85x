@@ -52,15 +52,15 @@ sudo usermod -d /var/opt/twonky twonky
 echo Supply additional defaults for this install
 sudo sh -c "echo \# Point twonky to the writable folders in this install >> /opt/twonky/twonkyserver-default.ini"
 # In twonky 8.5.1 cachedir is the only folder that twonky doesn't put in to its home directory, instead trying to 
-# write in the read-only install path. Fix this by defining either of appdata or cachedir.
+# write in the current (working) directory. Fix this by defining either of appdata or cachedir.
 #sudo sh -c "echo cachedir=/var/opt/twonky/cache >> /opt/twonky/twonkyserver-default.ini"
 sudo sh -c "echo appdata=/var/opt/twonky >> /opt/twonky/twonkyserver-default.ini"
 
 echo Supply config changes to group tracks by albumartist in preference to artist
-sudo sh -c "echo \# Changes from the Twonky defaults to group tracks in albums even when tracks have different artists >> /opt/twonky/twonkyserver-default.ini"
+sudo sh -c "echo \# Ensure twonky stores what it finds in the DB >> /opt/twonky/twonkyserver-default.ini"
 # Alternatively, or additionally: see view-patch
-sudo sh -c "echo force_albumartist=1 >> /opt/twonky/twonkyserver-default.ini"
-sudo sh -c "echo scan_compilation_flag=2 >> /opt/twonky/twonkyserver-default.ini"
+sudo sh -c "echo force_albumartist=0 >> /opt/twonky/twonkyserver-default.ini"
+sudo sh -c "echo scan_compilation_flag=0 >> /opt/twonky/twonkyserver-default.ini"
 
 echo Add a systemd unit file to run Twonky as a service on startup
 sudo cp ./twonky.service /etc/systemd/system/twonky.service
