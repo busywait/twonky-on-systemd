@@ -13,8 +13,7 @@ PIDFile=/var/run/twonky/mediaserver.pid
 ExecStart=/opt/twonky/twonkystarter -mspid /var/run/twonky/mediaserver.pid -logfile /var/log/twonky/twonky.log -inifile /etc/twonky/twonkyserver.ini ;
 ExecStop=kill -s TERM $MAINPID ;
 ExecStopPost=killall -s TERM twonkystarter ; killall -s TERM twonky ;
-# This kills the twonky server, I don't know why, it should not; reload via the Web UI instead
-#ExecReload=kill -s HUP $MAINPID ;
+ExecReload=kill -s HUP $MAINPID ;
 
 [Install]
 WantedBy=multi-user.target
