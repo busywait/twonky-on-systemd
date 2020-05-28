@@ -7,12 +7,13 @@ Type=simple
 User=twonky
 Group=twonky
 WorkingDirectory=/var/opt/twonky
-# Create /var/run/twonky to hold the service PID file
+# Instruct systemd to create and manage /var/run/twonky to hold the service PID file
 RuntimeDirectory=twonky
 PIDFile=/var/run/twonky/mediaserver.pid
 ExecStart=/opt/twonky/twonkystarter -mspid /var/run/twonky/mediaserver.pid -logfile /var/log/twonky/twonky.log -inifile /etc/twonky/twonkyserver.ini ;
 ExecStop=kill -s TERM $MAINPID ;
 ExecStopPost=killall -s TERM twonkystarter ; killall -s TERM twonky ;
+# Reload (usually?) fails because twonky stops - I don't know why.
 ExecReload=kill -s HUP $MAINPID ;
 
 [Install]
