@@ -9,7 +9,7 @@
 # are /var/opt/twonky, so that dbdir, tncache and the other working files are 
 # underneath .twonky
 
-echo This will stop the twonky service, remove the 
+echo This will stop the twonky service, remove the metadata cache DBs and thumbnails. 
 
 # shutdown any running servers
 sudo systemctl stop twonky
