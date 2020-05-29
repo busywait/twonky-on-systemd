@@ -2,6 +2,8 @@
 #set -x
 #trap read debug
 
+grep uuid /etc/twonky/twonkyserver.ini >> uuid_number.txt
+
 # remove from init
 sudo systemctl stop twonky
 sudo systemctl disable twonky
