@@ -1,0 +1,88 @@
+--- /opt/twonky/resources/views/view-definitions.xml~	2018-05-29 09:49:22.000000000 +0100
++++ /home/pi/twonky-sjm-customisations/view-definitions.xml	2017-11-26 11:18:23.000000000 +0000
+@@ -6,20 +6,20 @@
+ 		<container name='music' id='music' upnp:originalTrackNumber='1' createClass='object.item.audioItem.musicTrack,object.item.audioItem.online.musicTrack,object.item.audioItem.audioBroadcast,object.item.audioItem.online1.musicTrack,object.item.audioItem.playlist.musicTrack,object.item.audioItem.audioBook,object.item.audiofav'>
+ 			<container name='alltracks' id='music/all' createClass='object.item.audioItem.musicTrack' class='object.container'/>
+ 			<container name='artist' id='music/artists' class='object.container' createClass='object.item.audioItem.musicTrack'>
+-				<container buildon='upnp:artist' albumart='1' class='object.container.person.musicArtist' createClass='object.item.audioItem.musicTrack'/>
++				<container buildon='upnp:albumArtist' albumart='1' class='object.container.person.musicArtist' createClass='object.item.audioItem.musicTrack'/>
+ 			</container>
+ 			<container name='artistindex' id='music/artistindex' class='object.container' createClass='object.item.audioItem.musicTrack'>
+-				<container buildon='upnp:artist[3]' albumart='1' class='object.container' createClass='object.item.audioItem.musicTrack'>
+-					<container buildon='upnp:artist' albumart='1' class='object.container.person.musicArtist' createClass='object.item.audioItem.musicTrack'>
++				<container buildon='upnp:albumArtist[3]' albumart='0' class='object.container' createClass='object.item.audioItem.musicTrack'>
++					<container buildon='upnp:albumArtist' albumart='1' class='object.container.person.musicArtist' createClass='object.item.audioItem.musicTrack'>
+ 						<container name='allname' createClass='object.item.audioItem.musicTrack' class='object.container' />
+-						<container buildon='upnp:album' albumart='1' sortcriteria='+pv:numberOfThisDisc,+upnp:originalTrackNumber' createClass='object.item.audioItem.musicTrack' class='object.container.album.musicAlbum' />
++						<container buildon='upnp:album' albumart='1' sortcriteria='+pv:extension,+pv:numberOfThisDisc,+upnp:originalTrackNumber' createClass='object.item.audioItem.musicTrack' class='object.container.album.musicAlbum' />
+ 					</container>
+ 				</container>
+ 			</container>
+ 			<container name='composer' id='music/composers' createClass='object.item.audioItem.musicTrack' class='object.container' >
+ 				<container buildon='upnp:author@role' albumart='1' class='object.container.person.musicArtist' createClass='object.item.audioItem.musicTrack'>
+ 					<container name='allname' createClass='object.item.audioItem.musicTrack' class='object.container' />
+-					<container buildon='upnp:album' albumart='1' sortcriteria='+pv:numberOfThisDisc,+upnp:originalTrackNumber' createClass='object.item.audioItem.musicTrack' class='object.container.album.musicAlbum' />
++					<container buildon='upnp:album' albumart='1' sortcriteria='+pv:extension,+pv:numberOfThisDisc,+upnp:originalTrackNumber' createClass='object.item.audioItem.musicTrack' class='object.container.album.musicAlbum' />
+ 				</container>
+ 			</container>
+ 			<container name='rating' id='music/rating' createClass='object.item.audioItem.musicTrack' class='object.container' >
+@@ -27,7 +27,7 @@
+ 			</container>
+ 			<container name='artistalbum' id='music/artistalbum' class='object.container' createClass='object.item.audioItem.musicTrack'>				
+ 				<container buildon='upnp:artist' albumart='1' class='object.container.person.musicArtist' createClass='object.item.audioItem.musicTrack'>
+-					<container buildon='upnp:album' albumart='1' sortcriteria='+pv:numberOfThisDisc,+upnp:originalTrackNumber' createClass='object.item.audioItem.musicTrack' class='object.container.album.musicAlbum' />
++					<container buildon='upnp:album' albumart='1' sortcriteria='+pv:extension,+pv:numberOfThisDisc,+upnp:originalTrackNumber' createClass='object.item.audioItem.musicTrack' class='object.container.album.musicAlbum' />
+ 				</container>
+ 			</container>
+ 			<container name='genre' id='music/genre' class='object.container' createClass='object.item.audioItem.musicTrack'>
+@@ -35,14 +35,14 @@
+ 			</container>
+ 			<container name='genrealbum' id='music/genrealbum' class='object.container' createClass='object.item.audioItem.musicTrack'>
+ 				<container buildon='upnp:genre' albumart='1' class='object.container.genre.musicGenre' createClass='object.item.audioItem.musicTrack' >
+-					<container buildon='upnp:album' albumart='1' sortcriteria='+pv:numberOfThisDisc,+upnp:originalTrackNumber' createClass='object.item.audioItem.musicTrack' class='object.container.album.musicAlbum' />
++					<container buildon='upnp:album' albumart='1' sortcriteria='+pv:extension,+pv:numberOfThisDisc,+upnp:originalTrackNumber' createClass='object.item.audioItem.musicTrack' class='object.container.album.musicAlbum' />
+ 				</container>
+ 			</container>
+ 			<container name='genreartistalbum' id='music/genreartistalbum' class='object.container' createClass='object.item.audioItem.musicTrack'>
+ 				<container buildon='upnp:genre' albumart='1' class='object.container.genre.musicGenre' createClass='object.item.audioItem.musicTrack'>
+ 					<container buildon='upnp:artist' albumart='1' class='object.container.person.musicArtist' createClass='object.item.audioItem.musicTrack'>
+ 						<container name='allname' createClass='object.item.audioItem.musicTrack' class='object.container' />
+-						<container buildon='upnp:album' albumart='1' sortcriteria='+pv:numberOfThisDisc,+upnp:originalTrackNumber' createClass='object.item.audioItem.musicTrack' class='object.container.album.musicAlbum' />
++						<container buildon='upnp:album' albumart='1' sortcriteria='+pv:extension,+pv:numberOfThisDisc,+upnp:originalTrackNumber' createClass='object.item.audioItem.musicTrack' class='object.container.album.musicAlbum' />
+ 					</container>
+ 				</container>
+ 			</container>
+@@ -67,7 +67,7 @@
+ 			<container name='bydate' id='music/date' class='object.container' createClass='object.item.audioItem.musicTrack'>
+ 				<container buildon='pv:era' class='object.container' createClass='object.item.audioItem.musicTrack'>
+ 					<container buildon='upnp:artist' albumart='1' class='object.container.person.musicArtist' createClass='object.item.audioItem.musicTrack'>
+-						<container buildon='upnp:album' albumart='1' sortcriteria='+pv:numberOfThisDisc,+upnp:originalTrackNumber' createClass='object.item.audioItem.musicTrack' class='object.container.album.musicAlbum' />
++						<container buildon='upnp:album' albumart='1' sortcriteria='+pv:extension,+pv:numberOfThisDisc,+upnp:originalTrackNumber' createClass='object.item.audioItem.musicTrack' class='object.container.album.musicAlbum' />
+ 					</container>
+ 				</container>
+ 			</container>
+@@ -85,20 +85,20 @@
+ 				<container name='allaudiobooks' id='music/audiobooksall' createClass='object.item.audioItem.audioBook' class='object.container' flags='skip_navtree_builder'/>
+ 				<container name='audiobookartist' albumart='1' class='object.container' createClass='object.item.audioItem.audioBook'>
+ 					<container buildon='upnp:artist' albumart='1' class='object.container.person.musicArtist' createClass='object.item.audioItem.audioBook'>
+-						<container buildon='upnp:album' albumart='1' sortcriteria='+pv:numberOfThisDisc,+upnp:originalTrackNumber' createClass='object.item.audioItem.audioBook' class='object.container.audiobookContainer' />
++						<container buildon='upnp:album' albumart='1' sortcriteria='+pv:extension,+pv:numberOfThisDisc,+upnp:originalTrackNumber' createClass='object.item.audioItem.audioBook' class='object.container.audiobookContainer' />
+ 					</container>
+ 				</container>
+ 				<container name='audiobookauthor' albumart='1' createClass='object.item.audioItem.audioBook' class='object.container' >
+ 					<container buildon='upnp:author@role' albumart='1' class='object.container.person.musicArtist' createClass='object.item.audioItem.audioBook'>
+-						<container buildon='upnp:album' albumart='1' sortcriteria='+pv:numberOfThisDisc,+upnp:originalTrackNumber' createClass='object.item.audioItem.audioBook' class='object.container.audiobookContainer' />
++						<container buildon='upnp:album' albumart='1' sortcriteria='+pv:extension,+pv:numberOfThisDisc,+upnp:originalTrackNumber' createClass='object.item.audioItem.audioBook' class='object.container.audiobookContainer' />
+ 					</container>
+ 				</container>
+ 				<container name='audiobookalbum' albumart='1' createClass='object.item.audioItem.audioBook' class='object.container' >
+-					<container buildon='upnp:album' albumart='1' sortcriteria='+pv:numberOfThisDisc,+upnp:originalTrackNumber' createClass='object.item.audioItem.audioBook' class='object.container.audiobookContainer' />
++					<container buildon='upnp:album' albumart='1' sortcriteria='+pv:extension,+pv:numberOfThisDisc,+upnp:originalTrackNumber' createClass='object.item.audioItem.audioBook' class='object.container.audiobookContainer' />
+ 				</container>
+ 				<container name='audiobookgenre' albumart='1' class='object.container' createClass='object.item.audioItem.audioBook'>
+ 					<container buildon='upnp:genre' albumart='1' class='object.container.genre.musicGenre' createClass='object.item.audioItem.audioBook' >
+-						<container buildon='upnp:album' albumart='1' sortcriteria='+pv:numberOfThisDisc,+upnp:originalTrackNumber' createClass='object.item.audioItem.audioBook' class='object.container.audiobookContainer' />
++						<container buildon='upnp:album' albumart='1' sortcriteria='+pv:extension,+pv:numberOfThisDisc,+upnp:originalTrackNumber' createClass='object.item.audioItem.audioBook' class='object.container.audiobookContainer' />
+ 					</container>
+ 				</container>
+ 			</container>

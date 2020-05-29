@@ -1,0 +1,18 @@
+<view name='SJM Tree' path='userview_SJM Tree.view'>
+  <navtree>
+    <container id='music'>
+      <link id='music/artistindex' />
+      <link id='music/genreartistalbum' />
+      <link id='music/audiobooks' />
+    </container>
+    <container id='picture'>
+      <link id='picture/folders' />
+      <link id='picture/date' />
+      <link id='picture/albums' />
+    </container>
+    <container id='video'>
+      <link id='video/folders' />
+      <link id='video/albums' />
+    </container>
+  </navtree>
+</view>
