@@ -14,7 +14,7 @@ PIDFile=/run/twonky/mediaserver.pid
 # WorkingDirectory is used to create the dbdir if appdir is not specified on the command line 
 WorkingDirectory=/var/opt/twonky
 
-ExecStart=/opt/twonky/twonkystarter -mspid /run/twonky/mediaserver.pid -logfile /var/log/twonky/twonky.log -inifile /etc/twonky/twonkyserver.ini -appdir /var/opt/twonky
+ExecStart=/opt/twonky/twonkystarter -mspid /run/twonky/mediaserver.pid -logfile /var/log/twonky/twonky.log -inifile /etc/twonky/twonkyserver.ini -appdata /var/opt/twonky
 
 ExecStop=kill -s TERM $MAINPID
 ExecStopPost=-killall -s TERM twonkystarter
