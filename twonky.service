@@ -16,3 +16,6 @@ ExecStopPost=-killall -s TERM twonkystarter
 ExecStopPost=-killall -s TERM twonky
 # Twonky doesn't appear to support reload, and stops with no error when this is called
 ExecReload=kill -s HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target
