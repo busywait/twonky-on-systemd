@@ -1,21 +1,29 @@
 [Unit]
-Description=Twonky Media Server
+Description=Twonky UPnP Media Server
 After=syslog.target network.target
 
 [Service]
 Type=simple
 User=twonky
 Group=twonky
-# create /run/twonky in the temporary /run filesystem, owned by user twonky, group twonky
+
+# create ./twonky in the temporary /run filesystem, for twonky to write the .pid file to
 RuntimeDirectory=twonky
 PIDFile=/run/twonky/mediaserver.pid
+
+# WorkingDirectory is used to create the dbdir if appdir is not specified on the command line 
 WorkingDirectory=/var/opt/twonky
-ExecStart=/opt/twonky/twonkystarter -mspid /run/twonky/mediaserver.pid -logfile /var/log/twonky/twonky.log -inifile /etc/twonky/twonkyserver.ini
+
+ExecStart=/opt/twonky/twonkystarter -mspid /run/twonky/mediaserver.pid -logfile /var/log/twonky/twonky.log -inifile /etc/twonky/twonkyserver.ini -appdir /var/opt/twonky
+
 ExecStop=kill -s TERM $MAINPID
 ExecStopPost=-killall -s TERM twonkystarter
 ExecStopPost=-killall -s TERM twonky
-# Twonky doesn't appear to support reload, and stops with no error when this is called
-ExecReload=kill -s HUP $MAINPID
+
+# Twonky doesn't appear to support reload, and stops with no logged error when this is called
+#ExecReload=kill -s HUP $MAINPID
+
+Restart=always
 
 [Install]
 WantedBy=multi-user.target

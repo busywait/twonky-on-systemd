@@ -2,6 +2,10 @@
 #set -x
 #trap read debug
 
+# remove from init
+sudo systemctl stop twonky
+sudo systemctl disable twonky
+
 # shutdown any running servers
 sudo killall -s TERM twonkystarter
 sudo killall -s TERM twonky
@@ -14,6 +18,9 @@ sudo rm -rf /var/log/twonky
 sudo rm -rf /etc/twonky
 sudo rm -rf /opt/twonky
 sudo userdel -r -f twonky
+
+# reload systemd service configurations
+sudo systemctl daemon-reload
 
 # remove things that might have been accidentally created
 if [ -e /etc/twonkyserver.ini ]

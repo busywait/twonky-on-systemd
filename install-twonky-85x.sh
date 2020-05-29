@@ -58,9 +58,9 @@ sudo sh -c "echo appdata=/var/opt/twonky >> /opt/twonky/twonkyserver-default.ini
 
 echo Supply config changes to group tracks by albumartist in preference to artist
 sudo sh -c "echo \# Ensure twonky stores what it finds in the DB >> /opt/twonky/twonkyserver-default.ini"
-# Alternatively, or additionally: see view-patch
+# Alternatively, or additionally: see view-patch.sh
 sudo sh -c "echo force_albumartist=0 >> /opt/twonky/twonkyserver-default.ini"
-sudo sh -c "echo scan_compilation_flag=0 >> /opt/twonky/twonkyserver-default.ini"
+sudo sh -c "echo scan_compilation_flag=2 >> /opt/twonky/twonkyserver-default.ini"
 
 echo Add a systemd unit file to run Twonky as a service on startup
 sudo cp ./twonky.service /etc/systemd/system/twonky.service
