@@ -11,7 +11,7 @@ Group=twonky
 RuntimeDirectory=twonky
 PIDFile=/run/twonky/mediaserver.pid
 
-# WorkingDirectory is used to create the dbdir if appdir is not specified on the command line 
+# Twonky tries to create dbdir in the WorkingDirectory unless appdir is specified on the command line 
 WorkingDirectory=/var/opt/twonky
 
 ExecStart=/opt/twonky/twonkystarter -mspid /run/twonky/mediaserver.pid -logfile /var/log/twonky/twonky.log -inifile /etc/twonky/twonkyserver.ini -appdata /var/opt/twonky
