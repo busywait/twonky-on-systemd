@@ -74,6 +74,6 @@ sudo cp ./twonky.service /etc/systemd/system/twonky.service
 sudo systemctl daemon-reload
 sudo systemctl enable twonky.service
 
-echo Start Twonky
+echo Start Twonky, configure at http://localhost:9000/
 # sudo -u twonky /opt/twonky/twonkystarter --mspid /var/run/twonky/twonky-mediaserver.pid --inifile /etc/twonky/twonkyserver.ini --logfile /var/log/twonky/twonky.log
 sudo systemctl start twonky.service
