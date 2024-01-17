@@ -2,9 +2,15 @@
 #set -x
 #trap read debug
 
-TWONKY_DOWNLOAD=http://download.twonky.com/8.5.1/
-#TWONKY_FILE=twonky-i686-glibc-2.9-8.5.1.zip
-TWONKY_FILE=twonky-armel-glibc-2.15-hf-8.5.1.zip
+TWONKY_DOWNLOAD=http://download.twonky.com/8.5.2/
+
+# Choose a build according to CPU arch and OS
+# ...Intel 64-bit
+#TWONKY_FILE=twonky-i686-glibc-2.9-8.5.2.zip
+# ...Pi 4b with 64-bit OS
+TWONKY_FILE=twonky-armv8-8.5.2.zip
+# ...Pi 3b or 4b with 32-bit OS
+#TWONKY_FILE=twonky-armel-glibc-2.15-hf-8.5.2.zip
 
 echo Check if the Twonky zip package has been downloaded already
 if [ ! -e ./$TWONKY_FILE ]
