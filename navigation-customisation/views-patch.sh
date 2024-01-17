@@ -16,6 +16,6 @@
 # view-definitions.xml from the original distribution.
 
 # This will create a backup using the -b option
-sudo patch -b /opt/twonky/resources/view-definitions.xml < view-definitions.patch
+sudo patch -b /opt/twonky/resources/views/view-definitions.xml < view-definitions.patch
 # revert using options -Rb, or copy the view-definitions.xml.orig file back to 
 # view-definitions.xml
