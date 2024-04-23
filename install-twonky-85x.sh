@@ -3,6 +3,7 @@
 #trap read debug
 
 TWONKY_DOWNLOAD=http://download.twonky.com/8.5.2/
+# Visit https://download.twonky.com/ to see the available versions
 
 # Choose a build according to CPU arch and OS
 # ...Intel 64-bit
