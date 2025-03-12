@@ -16,7 +16,7 @@ TWONKY_FILE=twonky-armv8-8.5.2.zip
 echo Check if the Twonky zip package has been downloaded already
 if [ ! -e ./$TWONKY_FILE ]
 then
-        echo downloading from http://download.twonky.com/8.5.1/
+        echo downloading from $TWONKY_DOWNLOAD
         wget $TWONKY_DOWNLOAD$TWONKY_FILE
 else
         echo using existing twonky package
